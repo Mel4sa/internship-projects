@@ -30,15 +30,53 @@ class ViewController: UIViewController {
     }
 
     @IBAction func equalsButton(_ sender: UIButton) {
-        let expression = NSExpression(format: calculatorWorkingsText)
-         
-         if let result = expression.expressionValue(with: nil, context: nil) as? Double {
-             let resultString = formatResult(result: result)
-             calculatorResult.text = resultString
-         } else {
-             calculatorResult.text = "Error"
-         }
-     }
+        if validInput() {
+                let checkedWorkingsForPercent = calculatorWorkingsText.replacingOccurrences(of: "%", with: "*0.01")
+                let expression = NSExpression(format: checkedWorkingsForPercent)
+
+                if let result = expression.expressionValue(with: nil, context: nil) as? Double {
+                    let resultString = formatResult(result: result)
+                    calculatorResult.text = resultString
+                } else {
+                    calculatorResult.text = "Error"
+                }
+            } else {
+                calculatorResult.text = "Geçersiz"
+            }
+        }
+    
+    func validInput() -> Bool {
+        let operators: Set<Character> = ["+", "-", "*", "/"]
+        let text = calculatorWorkingsText.trimmingCharacters(in: .whitespaces)
+        
+        // 1. Boşsa geçersiz
+        if text.isEmpty { return false }
+        
+        // 2. İlk veya son karakter işlemse → geçersiz
+        if let first = text.first, operators.contains(first) {
+            return false
+        }
+        
+        if let last = text.last, operators.contains(last) {
+            return false
+        }
+        
+        // 3. Arka arkaya iki işlem karakteri varsa → geçersiz
+        var previousChar: Character?
+        for char in text {
+            if let prev = previousChar, operators.contains(prev), operators.contains(char) {
+                return false
+            }
+            previousChar = char
+        }
+        
+        return true // Hepsini geçtiyse geçerli
+    }
+    
+    func specialCharacterCheck() -> Bool {
+        let specialCharacters = CharacterSet(charactersIn: "+-*/%")
+        return calculatorWorkingsText.rangeOfCharacter(from: specialCharacters) != nil
+    }
          
      func formatResult(result: Double) -> String {
          if result.truncatingRemainder(dividingBy: 1) == 0 {
@@ -87,7 +125,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func decimalButton(_ sender: UIButton) {
-        updateCalculatorWorkings(with: "/")
+        updateCalculatorWorkings(with: ".")
       
     }
     @IBAction func zeroTap(_ sender: Any) {
