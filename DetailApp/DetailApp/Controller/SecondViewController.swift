@@ -13,15 +13,16 @@ class SecondViewController: UIViewController {
 
         @IBOutlet weak var titleLabel: UILabel!
         @IBOutlet weak var descriptionTextView: UITextView!
-        @IBOutlet weak var favoriteSwitch: UISwitch!
+       
 
     var productTitle: String?
-        override func viewDidLoad() {
-            super.viewDidLoad()
-            titleLabel.text = productTitle
-                    descriptionTextView.text = "Swift programlama dili hakkında detaylı açıklama buraya gelecek."
-        }
-
+        var productDescription: String?
+    override func viewDidLoad() {
+        super.viewDidLoad()
+      
+        descriptionTextView.text = productDescription
+        titleLabel.text = productTitle
+    }
      
     
 }
