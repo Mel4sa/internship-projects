@@ -16,7 +16,7 @@ class SecondViewController: UIViewController {
        
 
     var productTitle: String?
-        var productDescription: String?
+    var productDescription: String?
     override func viewDidLoad() {
         super.viewDidLoad()
       
