@@ -11,4 +11,5 @@ import Foundation
 struct Meal: Codable {
     let name: String
     let calories: String
+    let iconName: String 
 }
