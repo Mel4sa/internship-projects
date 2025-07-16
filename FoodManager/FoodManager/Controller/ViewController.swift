@@ -93,25 +93,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBAction func addMealTapped(_ sender: UIButton) {
         guard let name = nameTextField.text, !name.isEmpty else {
-                showAlert(message: "Lütfen yemek adını girin.")
-                return
-            }
-            
-            guard let calories = caloriesTextField.text, !calories.isEmpty else {
-                showAlert(message: "Lütfen kalori bilgisini girin.")
-                return
-            }
-            
-            let letters = CharacterSet.letters
-            if name.rangeOfCharacter(from: letters.inverted) != nil {
-                showAlert(message: "Yemek adı sadece harf içermelidir.")
-                return
-            }
-            
-            if Int(calories) == nil {
-                showAlert(message: "Kalori sadece sayı olmalıdır.")
-                return
-            }
+                    showAlert(message: "Lütfen yemek adını girin.")
+                    return
+                }
+                
+                guard let calories = caloriesTextField.text, !calories.isEmpty else {
+                    showAlert(message: "Lütfen kalori bilgisini girin.")
+                    return
+                }
+                
+             
+                let regex = "^[a-zA-ZçÇğĞıİöÖşŞüÜ ]+$"
+                if name.range(of: regex, options: .regularExpression) == nil {
+                    showAlert(message: "Yemek adı sadece harflerden oluşmalıdır.")
+                    return
+                }
+                
+
+                if Int(calories) == nil {
+                    showAlert(message: "Kalori sadece sayı olmalıdır.")
+                    return
+                }
+
 
             let newMeal = Meal(name: name, calories: calories)
             meals.append(newMeal)
