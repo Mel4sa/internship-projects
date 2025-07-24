@@ -27,7 +27,7 @@
         <!--RatesViewController-->
         <scene sceneID="alY-c8-D7W">
             <objects>
-                <viewController title="RatesViewController" id="M9t-Gb-o3d" customClass="UITableViewController" sceneMemberID="viewController">
+                <viewController title="RatesViewController" id="M9t-Gb-o3d" customClass="ViewController" customModule="ExTrack" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a70-B4-VzL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,7 +36,7 @@
                                 <rect key="frame" x="0.0" y="118" width="393" height="617"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RateCell " id="Mcd-Zl-6v5">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RateCell" id="Mcd-Zl-6v5">
                                         <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mcd-Zl-6v5" id="vKT-MH-EFc">
@@ -59,7 +59,7 @@
                     <tabBarItem key="tabBarItem" title="Kurlar" image="star" catalog="system" id="u36-ie-QTq"/>
                     <navigationItem key="navigationItem" id="dKe-9k-xyn"/>
                     <connections>
-                        <outlet property="tableView" destination="8K3-lf-9Al" id="Cqy-wF-m1I"/>
+                        <outlet property="tableView" destination="8K3-lf-9Al" id="ayc-AR-QL5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vsC-ed-RUa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
