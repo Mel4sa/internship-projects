@@ -18,7 +18,6 @@ class RatesViewController: UIViewController {
            let refreshControl = UIRefreshControl()
            refreshControl.addTarget(self, action: #selector(refreshRates), for: .valueChanged)
            tableView.refreshControl = refreshControl
-           
            loadCachedOrFetch()
        }
 

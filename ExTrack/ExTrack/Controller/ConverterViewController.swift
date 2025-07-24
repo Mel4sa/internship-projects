@@ -31,7 +31,7 @@ class ConverterViewController: UIViewController {
             toPicker.dataSource = self
             toPicker.delegate = self
             amountTextField.delegate = self
-            amountTextField.keyboardType = .decimalPad
+            amountTextField.keyboardType = .numbersAndPunctuation
 
             loadRatesFromCache()
         }
@@ -40,22 +40,24 @@ class ConverterViewController: UIViewController {
             if let cached = CacheManager.shared.loadRates() {
                 self.rates = cached.rates
                 self.currencies = rates.keys.sorted()
-                
-                if let fromIndex = currencies.firstIndex(of: "USD") {
-                    fromPicker.selectRow(fromIndex, inComponent: 0, animated: false)
-                }
-                if let toIndex = currencies.firstIndex(of: "TRY") {
-                    toPicker.selectRow(toIndex, inComponent: 0, animated: false)
-                }
 
-                selectedFrom = "USD"
-                selectedTo = "TRY"
+                DispatchQueue.main.async {
+                    if let fromIndex = self.currencies.firstIndex(of: "USD") {
+                        self.fromPicker.selectRow(fromIndex, inComponent: 0, animated: false)
+                        self.selectedFrom = self.currencies[fromIndex]
+                    }
+
+                    if let toIndex = self.currencies.firstIndex(of: "TRY") {
+                        self.toPicker.selectRow(toIndex, inComponent: 0, animated: false)
+                        self.selectedTo = self.currencies[toIndex]
+                    }
+                }
             } else {
                 resultLabel.text = "Önce liste ekranında veriyi yükleyin"
             }
         }
-
-        @IBAction func convertButtonTapped(_ sender: UIButton) {
+            
+    @IBAction func convertButtonTapped(_ sender: UIButton) {
             guard let amountText = amountTextField.text,
                   let amount = Double(amountText),
                   let fromRate = rates[selectedFrom],
@@ -65,7 +67,7 @@ class ConverterViewController: UIViewController {
             }
 
             let usdAmount = amount / fromRate
-            let convertedAmount = usdAmount * toRate
+           let convertedAmount = usdAmount * toRate
             resultLabel.text = "\(String(format: "%.2f", amount)) \(selectedFrom) = \(String(format: "%.2f", convertedAmount)) \(selectedTo)"
         }
     }
@@ -98,4 +100,11 @@ class ConverterViewController: UIViewController {
             amountTextField.resignFirstResponder()
             return true
         }
+        
+        func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            let allowedCharacters = CharacterSet(charactersIn: "0123456789.")
+            let characterSet = CharacterSet(charactersIn: string)
+            return allowedCharacters.isSuperset(of: characterSet)
+        }
     }
+
