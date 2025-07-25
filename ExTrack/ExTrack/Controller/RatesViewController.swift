@@ -51,7 +51,7 @@ class RatesViewController: UIViewController {
                    return
                }
 
-               // Cache'e kaydet
+              
                CacheManager.shared.save(rates: response.rates, date: response.date)
 
                self.allRates = response.rates.sorted { $0.key < $1.key }
