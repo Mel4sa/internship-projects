@@ -29,6 +29,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let flowLayout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         flowLayout.itemSize = CGSize(width: width, height: height)
     }
+    
     func numberOfSections(in cv: UICollectionView) -> Int
     {
         return board.count
